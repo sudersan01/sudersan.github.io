@@ -180,3 +180,16 @@ INSERT INTO `visit` (`Name`, `Email`, `Batch`, `Department`, `Mobile`, `Date of 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+CREATE TABLE IF NOT EXISTS `events1` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `image` longblob NOT NULL,
+  `uploaded` datetime NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(150) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+

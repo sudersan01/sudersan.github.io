@@ -1,15 +1,5 @@
-
 <?php
 session_start();
-$con = mysqli_connect('localhost','root','mysql');
-if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
-
-mysqli_select_db($con,'alumni');
-$query = "SELECT * FROM temporary";
-$result = mysqli_query($con,$query);
 ?>
 <! DOCTYPE HTML>
 <html>
@@ -54,10 +44,6 @@ $result = mysqli_query($con,$query);
    padding: 10px;
     float: left;
 }
-a {
-	color: white;
-
-}
 .one p,li
 {
 	font-size :16.5;
@@ -75,9 +61,6 @@ a {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
-}
-table{
-	border-color: white;
 }
 .button3 {border-radius: 8px;}
 .button {
@@ -122,10 +105,6 @@ table{
 	{
 		document.getElementById('alu').style.display="none";
 	}
-	function myprompt()
-	{
-		window.alert("You have requested to delete the request !!");
-	}
 </script>
 </head>
 
@@ -135,6 +114,7 @@ table{
 	<h1>ALUMNI DATABASE<h1> 
 </div>
 <br>
+
 <div style="margin: 0 0 0 1000px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="tce.png" width="50px" height="50px" style="border-radius: 25px;vertical-align: middle;" onmouseover="f1()" onmouseout="f2()"><span style="vertical-align: middle;font-weight: bold;text-overflow: ellipsis;"><br>
 	<?php echo $_SESSION["user"] ?></span><br></div>
 	<br>
@@ -155,7 +135,7 @@ table{
 		<a href="events.php">
 			<button class="button button3">Events</button>
 		</a>
-		<a href="index.html">
+		<a href="index.php">
 			<button class="button button3">Log out</button>
 		</a>
 
@@ -164,84 +144,20 @@ table{
 	
 	</div>
 <br>
+
 <section class="container">
 
-    <div class="one">
-	<font color="#0C2459" >
-		<h5> The updates are found here: </h5>
-
-		<table align="center" style="border:3px solid; color: darkslategray; box-shadow: 2px solid; padding: 7000px;">
-		<br>
-		<br>
-		
-			<!-- <h2 style="color: white; text-align: center;">Stock at the ware-house</h2> -->
-
-		
-		<tr>
-			<th colspan="1px" style="padding: 20px;">Name</th>
-			<th colspan="2px" style="padding: 20px;">Email</th>
-			<th colspan="2px" style="padding: 20px;">Mobile</th>
-			<th colspan="2px" style="padding: 20px;">Degree</th>
-			<th colspan="2px" style="padding: 20px;">Batch</th>
-			<th colspan="2px" style="padding: 20px;">Department</th>
-			<th colspan="5px" style="padding: 30px;">Verification</th>
-		</tr>
-
-		<?php
-		while($rows=mysqli_fetch_assoc($result))
-		{
-		?> 
-		
-
-		<tr>
-			<td  style="padding: 10px; font-weight: bold;"><em><?php echo $rows['NAME'];?></em>
-			
-			<td colspan="2px" style="padding: 20px;"><?php echo $rows['EMAIL'];?></td>
-			<!-- <button class="btn btn-primary"><a href="accept.php" style="color: white">Accept</a>
-			<button class="btn btn-danger"><a href="reject.php" style="color: white">Reject</a> -->
-			<td colspan="2px" style="padding: 20px;"><?php echo $rows['MOBILE'];?></td>
-			<!-- <button class="btn btn-primary"><a href="accept.php" style="color: white">Accept</a>
-			<button class="btn btn-danger"><a href="reject.php" style="color: white">Reject</a> -->
-			<td colspan="2px"style="padding: 20px;"><?php echo $rows['DEGREE'];?></td>
-			<!-- <button class="btn btn-primary"><a href="accept.php" style="color: white">Accept</a>
-			<button class="btn btn-danger"><a href="reject.php" style="color: white">Reject</a> -->
-			<td colspan="2px" style="padding: 20px;"><?php echo $rows['YOJ'];?></td>
-			<!-- <button class="btn btn-primary"><a href="accept.php" style="color: white">Accept</a>
-			<button class="btn btn-danger"><a href="reject.php" style="color: white">Reject</a> -->
-			<td colspan="2px" style="padding: 20px;"><?php echo $rows['BRANCH'];?></td>
-			<!-- <button class="btn btn-primary"><a href="accept.php" style="color: white">Accept</a>
-			<button class="btn btn-danger"><a href="reject.php" style="color: white">Reject</a> -->
-			<td colspan="5px" style="padding: 5px;">
-				
-<!-- 			<form action="submit" method="post">
- -->			
- 				<?php
- 				echo "<button class='btn btn-primary'>";	
-				echo "<a href='accept.php?id=".$rows['EMAIL']."'>Accept</a>";
-				echo "</button>";
-				echo "&nbsp&nbsp&nbsp&nbsp";	
-				echo "<button class='btn btn-danger' onclick='myprompt()'>";	
-
-				echo "<a href='reject.php?id=".$rows['EMAIL']."''>Reject</a>";
-				echo "</button>";
-				?>
-			
-
- 
-
-			<!-- <button class="btn btn-danger"><a href="reject.php" style="color: white">Reject</a></button> -->
-				
-			</td>
-			<!-- </form>	 -->
-		</tr>
-	<?php
-		}
-		?>
+<form action="upload.php" method="post" enctype="multipart/form-data">
+	<label>Event name:</label><br>
+	<input type="textbox" name="input-1" id="input-1" size=30 ><br>
+	<label>Event description:</label><br>
+	<textarea name="input-2" id="input-2" rows=3 size=50> </textarea><br>
+    <label>Select Image File:</label><br>
+    <input type="file" name="image"><br><br>
+    <input type="submit" name="submit" value="Upload">
+</form>
 
 
-		
-	</table>
-	<br>
 
 </section>
 <footer><center><img src="hel.png"></center> </footer>

@@ -187,7 +187,7 @@ $(function(){
  
   
   
-  <div class="container">
+  <div class="container"
  <div id="demo" class="carousel slide" data-ride="carousel">
   <ul class="carousel-indicators">
     <li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -273,16 +273,46 @@ $(function(){
 
 </nav>
 <br>
+<?php
+$dbHost     = "localhost";  
+$dbUsername = "root";  
+$dbPassword = "mysql";  
+$dbName     = "alumni";  
+  
+// Create database connection  
+$db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);  
+  
+// Check connection  
+if ($db->connect_error) {  
+    die("Connection failed: " . $db->connect_error);  
+}
+$result = $db->query("SELECT image FROM events WHERE Id=1");
+$name= $db->query("SELECT name FROM events WHERE Id=1");
+$desc=$db->query("SELECT description FROM events WHERE Id=1");
+$time=$db->query("SELECT uploaded FROM events WHERE Id=1");
+?>
+
+
+
 <div class="card-deck">
   <div class="card">
-    <img src="alumni-meet.png" class="card-img-top" alt="image not available !!!">
+    <?php while($row = $result->fetch_assoc()){ ?> 
+       
+    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" class="card-img-top" alt="image not available !!!">
+     <?php } ?>
     <div class="card-body">
-      <h5 class="card-title">Silver jubilee alumni meet</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <?php while($row = $name->fetch_assoc()){ ?> 
+      <h5 class="card-title"><?php echo($row['name']); ?></h5>
+      <?php } ?>
+        <?php while($row = $desc->fetch_assoc()){ ?> 
+      <p class="card-text"><?php echo($row['description']); ?></p>
+         <?php } ?>
     </div>
     <div class="card-footer">
         <a href="#" class="btn btn-primary">View</a><br><br>
-      <small class="text-muted">Last updated  0 mins ago</small>
+        <?php while($row = $time->fetch_assoc()){ ?> 
+      <small class="text-muted">Last updated <?php echo($row['uploaded']); ?></small>
+       <?php } ?>
     </div>
   </div>
   <div class="card">

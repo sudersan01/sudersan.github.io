@@ -131,7 +131,10 @@ session_start();
 		<a href="verify.php">
 			<button class="button button3">VERIFY</button>
 		</a>
-		<a href="index.html">
+		<a href="events.php">
+			<button class="button button3">Events</button>
+		</a>
+		<a href="index.php">
 			<button class="button button3">Log out</button>
 		</a>
 

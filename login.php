@@ -113,7 +113,7 @@ $followingdata = $result->fetch_assoc();
 		}
 		else
 		{
-			echo "<script> alert('Login successful'); </script>";
+			echo "<script>alert('Login successful'); </script>";
 			header("Location: home1.php");
 		}
 	}
