@@ -1,6 +1,6 @@
 <?php
 session_start();
-$conn1 = mysqli_connect('localhost','root','');
+$conn1 = mysqli_connect('localhost','root','mysql');
 if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -15,7 +15,10 @@ $id = $_GET['id'];
 ?>
 <!DOCTYPE html>
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style>
 .body
@@ -124,33 +127,22 @@ $id = $_GET['id'];
 	<h1>ALUMNI DATABASE<h1> 
 </div>
 <br>
-<div style="margin: 0 0 0 1000px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="tce.png" width="50px" height="50px" style="border-radius: 25px;vertical-align: middle;" onmouseover="f1()" onmouseout="f2()"><span style="vertical-align: middle;font-weight: bold;text-overflow: ellipsis;"><br>
-	<?php echo $_SESSION["user"] ?></span><br></div>
-	<br>
-	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-	
-		<a href="insertpage.php">
-			<button class="button button3">INSERT</button>
-		</a>
-		<a href="updatepage.php">
-			<button class="button button3">Update</button>
-		</a>
-		<a href="database1.php">
-			<button class="button button3">SEARCH</button>
-		</a>
-		<a href="verify.php">
-			<button class="button button3">VERIFY</button>
-		</a>
-		<a href="index.html">
-			<button class="button button3">Log out</button>
-		</a>
-
-		<br>
-
-
-	
+<div style="margin: 0 0 0 1000px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="tce.png" width="50px" height="50px" style="border-radius: 25px;vertical-align: middle;" onclick="fl()"><br><br>
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><?php echo $_SESSION["user"] ?>
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="insertpage.php">Insert</a></li>
+      <li><a href="updatepage.php">Update</a></li>
+      <li><a href="database1.php">Search</a></li>
+      <li><a href="verify.php">Verify</a></li>
+      <li><a href="events.php">Events</a></li>
+      <li><a href="index.php">Logout</a></li>
+    </ul>
+  </div>
+</div><span style="vertical-align: middle;font-weight: bold;text-overflow: ellipsis;">
 	</div>
-<br>
+	<br>
 <section class="container">
 
     <div class="one">
@@ -167,12 +159,22 @@ $id = $_GET['id'];
 			echo "Error: " .$query1. "<br>" .$conn1->error;
 		}
 
-		$query2 = "DELETE FROM temporary WHERE EMAIL='".$id."'";
+		$query2 = "DELETE FROM temporary WHERE EMAIL='".$id."';";
+		$ab= "SELECT COUNT(*) FROM temporary;";
+		$ct=mysqli_query($conn1,$ab);
 
 		if($conn1->query($query2) === TRUE)
 		{
-			echo "<script> alert('Deleted from temporary db');
-			window.location.href='adminhome.php'</script>";
+			echo "<script> alert('Deleted from temporary db');";
+			if($ct == 0)
+			{
+				echo "<script>window.location.href='adminhome.php'</script>";
+			}
+			else
+			{
+
+				echo "<script>window.location.href='verify.php'</script>";
+			}
 		}
 		else
 		{

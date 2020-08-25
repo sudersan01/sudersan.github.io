@@ -61,11 +61,14 @@ if (mysqli_connect_errno())
 
 <?php
 
-	$email_to = "tcealumni1957@gmail.com";
-        $email_subject = "Reg:Requesting database access";
-	$email_message = " ";
+	require "vendor/autoload.php";
 
-    $insti = " ";
+$robo = 'alumnitesting01@gmail.com';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+  $insti = " ";
 	$hispec = " ";
 	$workinfo =" ";
 	$domain = " ";
@@ -84,7 +87,7 @@ if (mysqli_connect_errno())
   $batch=$_POST["BATCH"];
   $branch=$_POST["BRANCH"];
   $degree=$_POST["DEGREE"];
-  $hi_edu=$_POST["HIGHER_EDU"]
+  $hi_edu=$_POST["HIGHER_EDU"];
   $email=$_POST["EMAIL"];
   //$specialization=$_POST["specialization"];
   //$emp=$_POST["emp"];
@@ -95,6 +98,7 @@ if (mysqli_connect_errno())
   $pw1=$_POST["pw1"];
   $mobile=$_POST["MOBILE"];
   $pw2=$_POST["pw2"];
+  
   //$will=$_POST["willingness"];
   if(($pw1==$pw2 ) == FALSE)
     {
@@ -104,7 +108,53 @@ if (mysqli_connect_errno())
   else
   {
 
-
 mysqli_select_db($con,'alumni');
-$query = "INSERT INTO temporary VALUES ('','".$regno."','".$name."','".$email."','".$pw1."','".$mobile."','".$degree."','".$branch."','".$batch."','".$location."','".$designation."','".$domain."','".$hi_edu."');";
+$ab="SELECT COUNT(*) FROM temporary;";
+$ct=mysqli_query($con,$ab);
+$ct=$ct+1;
+$query = "INSERT INTO temporary VALUES ('".$ct."','".$regno."','".$name."','".$email."','".$pw1."','".$mobile."','".$degree."','".$branch."','".$batch."','".$location."','".$designation."','".$domain."','".$hi_edu."');";
+$result=mysqli_query($con,$query);
+header("Location: index.php");
+
+$developmentMode = true;
+$mailer = new PHPMailer($developmentMode);
+
+try {
+    $mailer->SMTPDebug = 2;
+    $mailer->isSMTP();
+
+    if ($developmentMode) {
+    $mailer->SMTPOptions = [
+        'ssl'=> [
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+        ]
+    ];
+    }
+
+
+    $mailer->Host = 'smtp.gmail.com';
+    $mailer->SMTPAuth = true;
+    $mailer->Username = 'alumnitesting01@gmail.com';
+    $mailer->Password = 'alumnitce@2k20';
+    $mailer->SMTPSecure = 'tls';
+    $mailer->Port = 587;
+
+    $mailer->setFrom('alumnitesting01@gmail.com', 'TCE Alumni');
+    // for testing please use your  own email; on application use tcealumni1957@gmail.com
+    $mailer->addAddress('drgamutha@gmail.com', 'Sudersan'); // (receiver email address, receiver name)
+
+    $mailer->isHTML(true);
+    $mailer->Subject = 'Reg:Requesting database access';
+    $mailer->Body = $name.' has send to a request to be made a member of the alunmni circle of Thiagarajar College of Engineering.';
+
+    $mailer->send();
+    $mailer->ClearAllRecipients();
+
+} catch (Exception $e) {
+    echo "EMAIL SENDING FAILED. INFO: " . $mailer->ErrorInfo;
+}
+
+
   }

@@ -15,7 +15,10 @@ $result = mysqli_query($con,$query);
 <html>
 
 <head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style>
 .body
@@ -135,37 +138,26 @@ table{
 	<h1>ALUMNI DATABASE<h1> 
 </div>
 <br>
-<div style="margin: 0 0 0 1000px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="tce.png" width="50px" height="50px" style="border-radius: 25px;vertical-align: middle;" onmouseover="f1()" onmouseout="f2()"><span style="vertical-align: middle;font-weight: bold;text-overflow: ellipsis;"><br>
-	<?php echo $_SESSION["user"] ?></span><br></div>
-	<br>
-	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-	
-		<a href="insertpage.php">
-			<button class="button button3">INSERT</button>
-		</a>
-		<a href="updatepage.php">
-			<button class="button button3">Update</button>
-		</a>
-		<a href="database1.php">
-			<button class="button button3">SEARCH</button>
-		</a>
-		<a href="verify.php">
-			<button class="button button3">VERIFY</button>
-		</a>
-		<a href="events.php">
-			<button class="button button3">Events</button>
-		</a>
-		<a href="index.html">
-			<button class="button button3">Log out</button>
-		</a>
-
-		<br>
-
-	
+<div style="margin: 0 0 0 1000px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="tce.png" width="50px" height="50px" style="border-radius: 25px;vertical-align: middle;" onclick="fl()"><br><br>
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><?php echo $_SESSION["user"] ?>
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="insertpage.php">Insert</a></li>
+      <li><a href="updatepage.php">Update</a></li>
+      <li><a href="database1.php">Search</a></li>
+      <li><a href="verify.php">Verify</a></li>
+      <li><a href="events.php">Events</a></li>
+      <li><a href="index.php">Logout</a></li>
+    </ul>
+  </div>
+</div><span style="vertical-align: middle;font-weight: bold;text-overflow: ellipsis;">
 	</div>
-<br>
-<section class="container">
+	<br>
 
+
+
+<section class="container">
     <div class="one">
 	<font color="#0C2459" >
 		<h5> The updates are found here: </h5>
