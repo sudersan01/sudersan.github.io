@@ -150,8 +150,6 @@ if(!isset($_SESSION["user"])){
     <input type="submit" name="submit" value="Upload">
 </form>
 
-
-
 </section>
 <footer><center><img src="hel.png"></center> </footer>
 </BODY>
