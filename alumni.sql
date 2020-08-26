@@ -90,34 +90,6 @@ INSERT INTO `temporary` (`SNO`, `REGNO`, `NAME`, `EMAIL`, `PASSWORD`, `MOBILE`, 
 -- Table structure for table `verification`
 --
 
-CREATE TABLE IF NOT EXISTS `verification` (
-  `SNO` int(20) NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(20) DEFAULT NULL,
-  `EMAIL` varchar(36) DEFAULT NULL,
-  `MOBILE` bigint(10) DEFAULT NULL,
-  `DEGREE` varchar(3) DEFAULT NULL,
-  `DEPARTMENT` varchar(12) DEFAULT NULL,
-  `BATCH` int(4) DEFAULT NULL,
-  `EMPLOYER` varchar(17) DEFAULT NULL,
-  `DESIGNATION` varchar(11) DEFAULT NULL,
-  `PASSWORD` varchar(20) DEFAULT NULL,
-  `LOCATION` varchar(7) DEFAULT NULL,
-  `WORK_INFO` varchar(11) DEFAULT NULL,
-  `DOMAIN` varchar(11) DEFAULT NULL,
-  `WILLINGNESS` varchar(18) DEFAULT NULL,
-  `REGNO` varchar(7) DEFAULT NULL,
-  `HIGHER_EDUCATION` varchar(7) DEFAULT NULL,
-  `INSTITUTION` varchar(19) DEFAULT NULL,
-  PRIMARY KEY (`SNO`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `verification`
---
-
-INSERT INTO `verification` (`SNO`, `NAME`, `EMAIL`, `MOBILE`, `DEGREE`, `DEPARTMENT`, `BATCH`, `EMPLOYER`, `DESIGNATION`, `PASSWORD`, `LOCATION`, `WORK_INFO`, `DOMAIN`, `WILLINGNESS`, `REGNO`, `HIGHER_EDUCATION`, `INSTITUTION`) VALUES
-(1, 'Admin', 'tcealumni1957@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'alumnitce@2k20', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'ABHIJITH', 'vsa3441@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, 'abhi', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 

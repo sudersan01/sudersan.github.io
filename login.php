@@ -1,5 +1,8 @@
 ﻿<?php
 session_start();
+if(!isset($_SESSION["user"])){
+	header('Location: signin.php');
+}
 $conn1 = mysqli_connect('localhost','root','mysql');
 if (mysqli_connect_errno())
   {
@@ -84,8 +87,7 @@ $pass = $_POST["password"];
 $rowcount = 0;
 
 mysqli_select_db($conn1,'alumni');
-// $query = "SELECT PASSWORD FROM verification where EMAIL='".$user."'";
-$query = "SELECT PASSWORD FROM verification where EMAIL= '".$user."'";
+$query = "SELECT PASSWORD FROM db1 where EMAIL= '".$user."';";
 // $result = mysqli_query($conn1,$query);
 $result = mysqli_query($conn1,$query);
 
@@ -113,7 +115,7 @@ $followingdata = $result->fetch_assoc();
 		}
 		else
 		{
-			echo "<script>alert('Login successful'); </script>";
+			echo "<script>window.alert('Login successful'); </script>";
 			header("Location: home1.php");
 		}
 	}

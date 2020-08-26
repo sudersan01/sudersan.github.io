@@ -1,12 +1,18 @@
-<!-- Surya Rumesh Started -->
+
 <?php
 session_start();
+if(!isset($_SESSION["user"])){
+  header('Location: signin.php');
+}
 ?>
-<!-- Surya Rumesh ended-->
 <! DOCTYPE HTML>
 <HTML>
 
 <HEAD>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
 .body
 		{
@@ -225,9 +231,17 @@ button.mbtn.green
 	<h1>PROFILE DETAILS<h1> 
 </div>
 <br>
-<div style="margin: 0 0 0 1030px"><img src="tce.png" width="50px" height="50px" style="border-radius: 25px;vertical-align: middle;" onmouseover="f1()" onmouseout="f2()">&nbsp&nbsp<span style="vertical-align: middle;font-weight: bold;text-overflow: ellipsis;"><?php echo $_SESSION["user"] ?></span><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="index.html"><button class="button button3">Log out</button></a></div>
-<br>
-<!-- Surya Rumesh edited here -->
+<div style="margin: 0 0 0 1000px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="tce.png" width="50px" height="50px" style="border-radius: 25px;vertical-align: middle;" onclick="fl()"><br><br>
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><?php echo $_SESSION["user"] ?>
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="index.php">Logout</a></li>
+    </ul>
+  </div>
+</div><span style="vertical-align: middle;font-weight: bold;text-overflow: ellipsis;">
+  </div>
+  <br>
 <?php
 $sql=new PDO('mysql:host=localhost;dbname=alumni','root','mysql');
 $stm=$sql->prepare("select * from db1 where db1.email='".$_SESSION['user']."'");
