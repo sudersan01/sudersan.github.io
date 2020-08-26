@@ -63,24 +63,7 @@ if (mysqli_connect_errno())
 
 $email1 = $_POST["username"];
 $_SESSION["user"] = "$email1";
-// $username="root";
-// 	$password="";
-// 	$database="alumni";
-// 	$server="localhost";
 
-// $conn1 = mysqli_connect($server, $username, $password, $database);
-
-// $check = "SELECT PASSWORD from VERIFICATION where EMAIL='".$email1."'";
-
-// 	if(!$conn1)
-// 	{
-// 		//die("Connection error :" . $conn1->connect_error);
-// 		echo "fatal error";
-// 	}
-
-//      $result=mysqli_query($conn1,$check);
-// 	 $row = mysqli_fetch_array($result);
-// 	 $ans= $check;
 
 $user = $_POST["username"];
 $pass = $_POST["password"];
