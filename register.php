@@ -1,5 +1,8 @@
 <?php
 header( "refresh:8;url=index.php" );
+if(!isset($_SESSION["user"])){
+	header('Location: signin.php');
+}
 session_start();
 $con = mysqli_connect('localhost','root','mysql');
 if (mysqli_connect_errno())
