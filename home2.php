@@ -1,8 +1,13 @@
-<!-- Surya Rumesh Started -->
+<!-- Surya Rumesh and Abhijith Started -->
 <?php
 session_start();
+
+if(!isset($_SESSION["user"])){
+	header('Location: signin.php');
+}
+
 ?>
-<!-- Surya Rumesh ended-->
+<!-- Surya Rumesh Abhijth ended-->
 <! DOCTYPE HTML>
 <HTML>
 
