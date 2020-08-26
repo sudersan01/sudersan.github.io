@@ -1,5 +1,8 @@
-﻿<?php
+<?php
 session_start();
+if(!isset($_SESSION["user"])){
+	header('Location: signin.php');
+}
 $conn1 = mysqli_connect('localhost','root','mysql');
 if (mysqli_connect_errno())
   {
