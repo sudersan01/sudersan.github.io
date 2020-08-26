@@ -136,14 +136,14 @@ try {
 
     $mailer->Host = 'smtp.gmail.com';
     $mailer->SMTPAuth = true;
-    $mailer->Username = 'alumnitesting01@gmail.com';
-    $mailer->Password = 'alumnitce@2k20';
+    $mailer->Username = '';//sender email
+    $mailer->Password = '';//sender password
     $mailer->SMTPSecure = 'tls';
     $mailer->Port = 587;
 
     $mailer->setFrom('alumnitesting01@gmail.com', 'TCE Alumni');
     // for testing please use your  own email; on application use tcealumni1957@gmail.com
-    $mailer->addAddress('drgamutha@gmail.com', 'Sudersan'); // (receiver email address, receiver name)
+    $mailer->addAddress('', ''); // (receiver email address, receiver name)
 
     $mailer->isHTML(true);
     $mailer->Subject = 'Reg:Requesting database access';
