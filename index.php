@@ -1,11 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['user']) ){
 
-// destroy the session
-session_destroy(); 
-
-}
 ?>
 <html><head>
 
