@@ -1,8 +1,12 @@
 <?php
 session_start();
-if(!isset($_SESSION["user"])){
+if($_SESSION["user"] != "tcealumni1957@gmail.com")
+{
 	header('Location: signin.php');
 }
+// if(!isset($_SESSION["user"])){
+// 	header('Location: signin.php');
+// }
 ?>
 <! DOCTYPE HTML>
 <html>
@@ -198,7 +202,16 @@ if(!isset($_SESSION["user"])){
     </font>
     </div>
 
-  
+   <!--  <div class="side" style="">
+	<ul type="none">
+	<li><button class="btn btn-primary"><a href="register1.html" style="color: white;"> Visit the instituition</a></li><br>
+	<li><button class="btn btn-primary"><a href="database1.php" style="color:white;"> Search</a></button></li><br>
+	<li><button class="btn btn-primary"><a href="insertpage.php" style="color:white;"> Insert</a></button></li><br>
+	<li><button class="btn btn-primary"><a href="updatepage.php" style="color:white;"> Update</a></button></li><br>
+	<li><button class="btn btn-primary"><a href="verify.php" style="color:white;">Verify Registration</a></button></li><br>
+</ul>
+	
+    </div> -->
 
 </section>
 <footer><center><img src="hel.png"></center> </footer>
