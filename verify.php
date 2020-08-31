@@ -225,7 +225,7 @@ table{
 
  
 
-			<!-- <button class="btn btn-danger"><a href="reject.php" style="color: white">Reject</a></button> -->
+			
 				
 			</td>
 			<!-- </form>	 -->

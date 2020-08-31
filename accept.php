@@ -12,8 +12,6 @@ if (mysqli_connect_errno())
   }
 
 mysqli_select_db($conn1,"alumni");
-// $query = "SELECT * FROM temp";
-// $result = mysqli_query($con,$query);
 
 $id = $_GET['id'];
 $ab="SELECT name FROM temporary WHERE email='".$id."';";

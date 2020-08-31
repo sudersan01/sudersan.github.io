@@ -47,9 +47,7 @@ if (mysqli_connect_errno())
 
    </style>
   
-  <!-- <link rel="stylesheet" type="text/css" href="db1.css"> -->
-  <!-- <link href="layout.css" rel="stylesheet" type="text/css" />
-        <link href="menu.css" rel="stylesheet" type="text/css" /> -->
+ 
 
 
 
