@@ -1,7 +1,8 @@
 <?php
 session_start();
-if(!isset($_SESSION["user"])){
-	header('Location: signin.php');
+if($_SESSION["user"] != "tcealumni1957@gmail.com")
+{
+  header('Location: signin.php');
 }
 ?>
 <! DOCTYPE HTML>

@@ -1,11 +1,9 @@
-<!-- abhi started here -->
 <?php
 session_start();
 if(!isset($_SESSION["user"])){
 	header('Location: signin.php');
 }
 ?>
-<!-- abhi ended here -->
 <! DOCTYPE HTML>
 <HTML>
 

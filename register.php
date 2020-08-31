@@ -1,8 +1,10 @@
 <?php
 header( "refresh:8;url=index.php" );
-if(!isset($_SESSION["user"])){
-	header('Location: signin.php');
+if($_SESSION["user"] != "tcealumni1957@gmail.com")
+{
+  header('Location: signin.php');
 }
+
 session_start();
 $con = mysqli_connect('localhost','root','mysql');
 if (mysqli_connect_errno())
@@ -112,11 +114,15 @@ use PHPMailer\PHPMailer\Exception;
   {
 
 mysqli_select_db($con,'alumni');
-$ab="SELECT COUNT(*) FROM temporary;";
-$ct=mysqli_query($con,$ab);
-$ct=$ct+1;
-$query = "INSERT INTO temporary VALUES ('".$ct."','".$regno."','".$name."','".$email."','".$pw1."','".$mobile."','".$degree."','".$branch."','".$batch."','".$location."','".$designation."','".$domain."','".$hi_edu."');";
+$query = "INSERT INTO temporary VALUES ('".$regno."','".$name."','".$email."','".$pw1."','".$mobile."','".$degree."','".$branch."','".$batch."','".$location."','".$designation."','".$domain."','".$hi_edu."');";
 $result=mysqli_query($con,$query);
+if($result = mysqli_query($con, $query)) {
+    $success = "Successful!";
+  } 
+  else {
+    $failure = "Unable to INSERT into DB: " . mysqli_error($con);
+    echo $failure;
+  }
 header("Location: index.php");
 
 $developmentMode = true;
@@ -139,14 +145,14 @@ try {
 
     $mailer->Host = 'smtp.gmail.com';
     $mailer->SMTPAuth = true;
-    $mailer->Username = '';//sender email
-    $mailer->Password = '';//sender password
+    $mailer->Username = 'alumnitesting01@gmail.com';
+    $mailer->Password = 'alumnitce@2k20';
     $mailer->SMTPSecure = 'tls';
     $mailer->Port = 587;
 
     $mailer->setFrom('alumnitesting01@gmail.com', 'TCE Alumni');
     // for testing please use your  own email; on application use tcealumni1957@gmail.com
-    $mailer->addAddress('', ''); // (receiver email address, receiver name)
+    $mailer->addAddress('drgamutha@gmail.com', 'Sudersan'); // (receiver email address, receiver name)
 
     $mailer->isHTML(true);
     $mailer->Subject = 'Reg:Requesting database access';
@@ -161,3 +167,4 @@ try {
 
 
   }
+  ?>

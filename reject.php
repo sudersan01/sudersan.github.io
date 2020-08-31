@@ -1,6 +1,7 @@
 <?php
 session_start();
-if(!isset($_SESSION["user"])){
+if($_SESSION["user"] != "tcealumni1957@gmail.com")
+{
 	header('Location: signin.php');
 }
 $conn1 = mysqli_connect('localhost','root','mysql');
@@ -14,6 +15,9 @@ mysqli_select_db($conn1,"alumni");
 // $result = mysqli_query($con,$query);
 
 $id = $_GET['id'];
+$ab="SELECT name FROM temporary WHERE email='".$id."';";
+$result=mysqli_query($conn1,$ab);
+$name=mysqli_fetch_array($result)['name'];
 
 ?>
 <!DOCTYPE html>
@@ -158,8 +162,8 @@ $id = $_GET['id'];
 
 		if($conn1->query($query2) === TRUE)
 		{
-			echo "<script> alert('Request rejected !!');
-			window.location.href='adminhome.php'</script>";
+			echo "<script> alert('Request rejected !!');</script>";
+			header('Location:verify.php');
 		}
 		else
 		{
@@ -169,8 +173,58 @@ $id = $_GET['id'];
 		?>
 
 		<?php
-		
-		?>
+
+			require "vendor/autoload.php";
+
+		$robo = 'alumnitesting01@gmail.com';
+
+		use PHPMailer\PHPMailer\PHPMailer;
+		use PHPMailer\PHPMailer\Exception;
+
+$developmentMode = true;
+$mailer = new PHPMailer($developmentMode);
+
+try {
+    $mailer->SMTPDebug = 2;
+    $mailer->isSMTP();
+
+    if ($developmentMode) {
+    $mailer->SMTPOptions = [
+        'ssl'=> [
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+        ]
+    ];
+    }
+
+
+    $mailer->Host = 'smtp.gmail.com';
+    $mailer->SMTPAuth = true;
+    $mailer->Username = 'alumnitesting01@gmail.com';
+    $mailer->Password = 'alumnitce@2k20';
+    $mailer->SMTPSecure = 'tls';
+    $mailer->Port = 587;
+
+    $mailer->setFrom('alumnitesting01@gmail.com', 'TCE Alumni');
+    // for testing please use your  own email; on application use tcealumni1957@gmail.com
+    $mailer->addAddress($id, $name); // (receiver email address, receiver name)
+
+    $mailer->isHTML(true);
+    $mailer->Subject = 'Reg:Database access denied';
+    $mailer->Body = 'Sorry '.$name.' your request to join the Alumni circle of Thiagarajar College of Engineering has been rejected. For further details contact tcealumni1957@gmail.com';
+
+    $mailer->send();
+    $mailer->ClearAllRecipients();
+
+} catch (Exception $e) {
+    echo "EMAIL SENDING FAILED. INFO: " . $mailer->ErrorInfo;
+}
+
+
+  
+				
+				?>
 
 	</table>
 	<br>

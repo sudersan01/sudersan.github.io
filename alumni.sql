@@ -27,7 +27,6 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `db1` (
-  `SNO` int(12) NOT NULL AUTO_INCREMENT,
   `REGNO` varchar(10) DEFAULT NULL,
   `NAME` varchar(42) DEFAULT NULL,
   `EMAIL` varchar(84) DEFAULT NULL,
@@ -48,9 +47,9 @@ CREATE TABLE IF NOT EXISTS `db1` (
 -- Dumping data for table `db1`
 --
 
-INSERT INTO `db1` (`SNO`, `REGNO`, `NAME`, `EMAIL`, `PASSWORD`, `MOBILE`, `DEGREE`, `BRANCH`, `YOJ`, `LOCATION`, `DESIGNATION`, `DOMAIN`, `HIGHER_EDU`) VALUES
-(1, NULL, 'Admin', 'tcealumni1957@gmail.com', 'alumnitce@', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1, '18IT003', 'ABHIJITH', 'vsa3441@gmail.com', 'abhi', '99999999', 'B.Tech', 'IT', '', '', '', '', 'No');
+INSERT INTO `db1` (`REGNO`, `NAME`, `EMAIL`, `PASSWORD`, `MOBILE`, `DEGREE`, `BRANCH`, `YOJ`, `LOCATION`, `DESIGNATION`, `DOMAIN`, `HIGHER_EDU`) VALUES
+(NULL, 'Admin', 'tcealumni1957@gmail.com', 'alumnitce@2k20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+( '18IT003', 'ABHIJITH', 'vsa3441@gmail.com', 'abhi', '99999999', 'B.Tech', 'IT', '', '', '', '', 'No');
 
 -- --------------------------------------------------------
 
@@ -59,7 +58,6 @@ INSERT INTO `db1` (`SNO`, `REGNO`, `NAME`, `EMAIL`, `PASSWORD`, `MOBILE`, `DEGRE
 --
 
 CREATE TABLE IF NOT EXISTS `temporary` (
-  `SNO` int(12) NOT NULL AUTO_INCREMENT,
   `REGNO` varchar(20) NOT NULL,
   `NAME` varchar(255) NOT NULL,
   `EMAIL` varchar(255) NOT NULL,
@@ -75,14 +73,14 @@ CREATE TABLE IF NOT EXISTS `temporary` (
   PRIMARY KEY (`SNO`),
   UNIQUE KEY `EMAIL` (`EMAIL`),
   UNIQUE KEY `EMAIL_2` (`EMAIL`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1  ;
 
 --
 -- Dumping data for table `temporary`
 --
 
-INSERT INTO `temporary` (`SNO`, `REGNO`, `NAME`, `EMAIL`, `PASSWORD`, `MOBILE`, `DEGREE`, `BRANCH`, `YOJ`, `LOCATION`, `DESIGNATION`, `DOMAIN`, `HIGHER_EDU`) VALUES
-(1, '18IT003', 'VSA', 'vsa3441@gmail.com', 'test', 0, '', '', '', '', '', '', '');
+INSERT INTO `temporary` (`REGNO`, `NAME`, `EMAIL`, `PASSWORD`, `MOBILE`, `DEGREE`, `BRANCH`, `YOJ`, `LOCATION`, `DESIGNATION`, `DOMAIN`, `HIGHER_EDU`) VALUES
+('18IT003', 'VSA', 'vsa3441@gmail.com', 'test', 0, '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -154,14 +152,17 @@ INSERT INTO `visit` (`Name`, `Email`, `Batch`, `Department`, `Mobile`, `Date of 
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 
-CREATE TABLE IF NOT EXISTS `events1` (
+CREATE TABLE IF NOT EXISTS `events` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `image` longblob NOT NULL,
   `uploaded` datetime NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` varchar(150) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
-
+CREATE TABLE IF NOT EXISTS `password_reset_temp` (
+  `email` varchar(250) NOT NULL,
+  `key` varchar(250) NOT NULL,
+  `expDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

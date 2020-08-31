@@ -1,6 +1,7 @@
 <?php
 session_start();
-if(!isset($_SESSION["user"])){
+if($_SESSION["user"] != "tcealumni1957@gmail.com")
+{
 	header('Location: signin.php');
 }
 
@@ -15,6 +16,10 @@ mysqli_select_db($conn1,"alumni");
 // $result = mysqli_query($con,$query);
 
 $id = $_GET['id'];
+$ab="SELECT name FROM temporary WHERE email='".$id."';";
+$result=mysqli_query($conn1,$ab);
+$name = mysqli_fetch_array($result)['name'];
+
 
 ?>
 <!DOCTYPE html>
@@ -152,11 +157,18 @@ $id = $_GET['id'];
     <div class="one">
 	<font color="#0C2459" >
 		<?php
+		require "vendor/autoload.php";
+
+		$robo = 'alumnitesting01@gmail.com';
+
+		use PHPMailer\PHPMailer\PHPMailer;
+		use PHPMailer\PHPMailer\Exception;
 
 		$query1 = "INSERT INTO db1 SELECT * FROM temporary WHERE EMAIL='".$id."'";
 		if($conn1->query($query1) === TRUE)
 		{
 			echo "<script> alert('Accepted and moved to permanent DB');</script>";
+
 		}
 		else
 		{
@@ -164,32 +176,65 @@ $id = $_GET['id'];
 		}
 
 		$query2 = "DELETE FROM temporary WHERE EMAIL='".$id."';";
-		$ab= "SELECT COUNT(*) FROM temporary;";
-		$ct=mysqli_query($conn1,$ab);
+		
 
 		if($conn1->query($query2) === TRUE)
 		{
-			echo "<script> alert('Deleted from temporary db');";
-			if($ct == 0)
-			{
-				echo "<script>window.location.href='adminhome.php'</script>";
-			}
-			else
-			{
-
-				echo "<script>window.location.href='verify.php'</script>";
-			}
+			echo "<script> alert('Deleted from temporary db');</script>";
+			header('Location:verify.php');
 		}
 		else
 		{
 			echo "Error: " .$query1. "<br>" .$conn1->error;
 		}
 
+			$developmentMode = true;
+$mailer = new PHPMailer($developmentMode);
+
+try {
+    $mailer->SMTPDebug = 2;
+    $mailer->isSMTP();
+
+    if ($developmentMode) {
+    $mailer->SMTPOptions = [
+        'ssl'=> [
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+        ]
+    ];
+    }
+
+
+    $mailer->Host = 'smtp.gmail.com';
+    $mailer->SMTPAuth = true;
+    $mailer->Username = 'alumnitesting01@gmail.com';
+    $mailer->Password = 'alumnitce@2k20';
+    $mailer->SMTPSecure = 'tls';
+    $mailer->Port = 587;
+
+    $mailer->setFrom('alumnitesting01@gmail.com', 'TCE Alumni');
+    // for testing please use your  own email; on application use tcealumni1957@gmail.com
+    $mailer->addAddress($id, $name); // (receiver email address, receiver name)
+
+    $mailer->isHTML(true);
+    $mailer->Subject = 'Reg:Database access granted';
+    $mailer->Body = 'Congratulations '. $name .' your request to join the Alumni circle of Thiagarajar College of Engineering has been accepted.';
+
+    $mailer->send();
+    $mailer->ClearAllRecipients();
+
+} catch (Exception $e) {
+    echo "EMAIL SENDING FAILED. INFO: " . $mailer->ErrorInfo;
+}
+
+		
+		
+
+
 		?>
 
-		<?php
-		
-		?>
+	
 
 	</table>
 	<br>

@@ -1,8 +1,5 @@
-<?php
+﻿<?php
 session_start();
-if(!isset($_SESSION["user"])){
-	header('Location: signin.php');
-}
 $conn1 = mysqli_connect('localhost','root','mysql');
 if (mysqli_connect_errno())
   {
@@ -60,9 +57,14 @@ if (mysqli_connect_errno())
  
 
 <?php
+	require "vendor/autoload.php";
 
-$email1 = $_POST["username"];
-$_SESSION["user"] = "$email1";
+$robo = 'alumnitesting01@gmail.com';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+$email = $_POST["username"];
+$_SESSION["user"] = "$email";
 // $username="root";
 // 	$password="";
 // 	$database="alumni";
@@ -84,10 +86,68 @@ $_SESSION["user"] = "$email1";
 
 $user = $_POST["username"];
 $pass = $_POST["password"];
-$rowcount = 0;
 
 mysqli_select_db($conn1,'alumni');
-$query = "SELECT PASSWORD FROM db1 where EMAIL= '".$user."';";
+if(isset($_POST["forgotpw"]))
+	{
+		echo "<script> alert('Mail has been send to your email for password reset'); </script>";
+			header("Location: signin.php");
+
+$developmentMode = true;
+$mailer = new PHPMailer($developmentMode);
+
+try {
+    $mailer->SMTPDebug = 2;
+    $mailer->isSMTP();
+
+    if ($developmentMode) {
+    $mailer->SMTPOptions = [
+        'ssl'=> [
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+        ]
+    ];
+    }
+
+
+    $mailer->Host = 'smtp.gmail.com';
+    $mailer->SMTPAuth = true;
+    $mailer->Username = 'alumnitesting01@gmail.com';
+    $mailer->Password = 'alumnitce@2k20';
+    $mailer->SMTPSecure = 'tls';
+    $mailer->Port = 587;
+
+    $mailer->setFrom('alumnitesting01@gmail.com', 'TCE Alumni');
+    // for testing please use your  own email; on application use tcealumni1957@gmail.com
+    $mailer->addAddress($email, $name); // (receiver email address, receiver name)
+
+    $mailer->isHTML(true);
+    $mailer->Subject = 'Reg:PASSWORD RESET';
+    $mailer->Body = $name." You're receiving this e-mail because you requested a password reset for your user account at www.tce.edu.\r\n
+Please go to the following page and choose a new password:
+http://172.17.18.250/alumni/resetpw.php?user='$emaill1'/\r\n
+If you didn’t request this change, please ignore this email. No changes will be made to your account.\r\n\r\n
+Regards,\r\n
+TCE Alumni cell";
+
+    $mailer->send();
+    $mailer->ClearAllRecipients();
+
+} catch (Exception $e) {
+    echo "EMAIL SENDING FAILED. INFO: " . $mailer->ErrorInfo;
+}
+
+
+
+}
+
+
+else
+{
+
+
+$query = "SELECT PASSWORD FROM db1 where EMAIL= '".$user."'";
 // $result = mysqli_query($conn1,$query);
 $result = mysqli_query($conn1,$query);
 
@@ -115,7 +175,7 @@ $followingdata = $result->fetch_assoc();
 		}
 		else
 		{
-			echo "<script>window.alert('Login successful'); </script>";
+			echo "<script> alert('Login successful'); </script>";
 			header("Location: home1.php");
 		}
 	}
@@ -150,72 +210,14 @@ $followingdata = $result->fetch_assoc();
 	// }
 
 $conn1->close();
-
-		
-
-	
-	
-if(isset($_POST["forgotpw"]))
-	{
-		
-		if(empty($_POST["user"]))
-		{
-			echo "<script>
-			prompt('Enter yur email id in username field to reset password');
-			window.location.href='signin.php';
-			</script>";
-		}
-		
-		else
-		{
-			?>
- 	<div id="myModal" class="modal">
-
-  <div class="modal-content">
-  <br>
-    <span class="close">&times;</span>
-    <br>
-    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="tce.png" height="200px" width="300px">
-    <p id="user" style="font-family: Times; font-weight: bolder;font-size: 200%;color: white " ></p>
-  </div>
-
-</div>
-<script>
-    document.getElementById("user").innerHTML="Mail has been sent to your username for password reset";
- </script>;
- <?php
-			//ADD MAIL to redirect user to resetpw.php page with the entered password as value of resetpw.php's field (email1) i.e username
- $email1 = $user;
-$email1 = $_POST["username"];
-$emaill1=base64_encode($emaill);
-$email_to =$emaill;
-$email_subject = "Reg:PASSWORD RESET";
-$email_from="tcealumni1957@gmail.com";
-
-$body= "You're receiving this e-mail because you requested a password reset for your user account at www.tce.edu.\r\n
-Please go to the following page and choose a new password:
-http://172.17.18.250/alumni/resetpw.php?user='$emaill1'/\r\n
-If you didn’t request this change, please ignore this email. No changes will be made to your account.\r\n\r\n
-Regards,\r\n
-TCE Alumni cell";
-
-$headers = 'MIME-Version: 1.0' . "<br>";
-$headers .= 'Content-type: text/html; charset=iso-8859-1' . "<br>";
-$headers .= 'From:  ' . "TCE Alumni" . ' <' . $email_from .'>' . "<br>" .
-            'Reply-To: '.  $email_from . "<br>" .
-            'X-Mailer: PHP/' . phpversion();
-
-if(mail($email_to, $email_subject, $body, $headers))  
-{
-  
 }
-		}
-	
+?>
 
 		
-	}
 
- ?>
+	
+	
+
 
 </body>
 

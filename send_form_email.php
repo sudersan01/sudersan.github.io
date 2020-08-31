@@ -1,8 +1,8 @@
 <?php 
 session_start();
-if (isset($_SESSION['user'])) {
-  header( "refresh:8;url=home2.php" );
-  # code...
+if($_SESSION["user"] != "tcealumni1957@gmail.com")
+{
+  header('Location: home2.php');
 }
 else
 {

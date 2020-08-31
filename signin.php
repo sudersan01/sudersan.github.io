@@ -157,13 +157,13 @@ span.req {
 		 
 <div class="form-group">
 <label for="">PASSWORD </label> 
-<input class="form-control" type="password" name="password" placeholder = "Password" required="true">  
+<input class="form-control" type="password" name="password" placeholder = "Password" >  
  
 </div>
 
 <button  class="btn btn-primary btn-block" type="submit"   class="button btn-lg btn-block"style="font-weight:600;font-size:100%;">Login
 		</button>
-		<button  class="btn btn-info btn-block" type="submit"  name="forgotpw" class="button btn-lg btn-block"style="font-weight:600;font-size:100%;">Forgot Password
+		<button  class="btn btn-info btn-block" type="button" onclick="location.href='send_mail.php'"  name="forgotpw" class="button btn-lg btn-block"style="font-weight:600;font-size:100%;">Forgot Password
 		</button>
 		
 		

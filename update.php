@@ -1,7 +1,10 @@
-<!-- Surya started here-->
 <?php
 ob_start();
 session_start();
+if($_SESSION["user"] != "tcealumni1957@gmail.com")
+{
+	header('Location: signin.php');
+}
 $sql=new PDO('mysql:host=localhost;dbname=alumni','root','mysql');
 $stm=$sql->prepare("select * from db1 where db1.email='".$_SESSION['user']."'");
             $stm->execute();
