@@ -1,8 +1,9 @@
 <?php
 session_start();
-if(!isset($_SESSION["user"])){
-	header('Location: signin.php');
-}
+// if($_SESSION["user"] != "tcealumni1957@gmail.com")
+// {
+//   header('Location: signin.php');
+// }
 ?>
 <! DOCTYPE HTML>
 <html>
@@ -86,6 +87,16 @@ if(!isset($_SESSION["user"])){
   box-shadow: inset 1px 6px 12px powderblue, inset -1px -10px 5px #0C2459, 1px 2px 1px black;
    text-shadow: 1px 1px 1px black;
 }
+.mydiv
+{
+  border: 1px darkslategray solid;
+  box-shadow: 0 4px 8px 0 darkslategray, 0 6px 20px 0 darkslategray;
+  padding: 20px;
+
+  background-color: white;
+  margin-right: 200px;
+  margin-left:200px;
+}
 
 #alu tr{background-color:white;}
 
@@ -139,16 +150,42 @@ if(!isset($_SESSION["user"])){
 	<br>
 
 <section class="container">
-
-<form action="upload.php" method="post" enctype="multipart/form-data">
+  <div class="mydiv">
+    <h3 align="center"><b>Publish Events here !</b></h3>
+<!-- <form action="upload.php" method="post" enctype="multipart/form-data">
 	<label>Event name:</label><br>
 	<input type="textbox" name="input-1" id="input-1" size=30 ><br>
 	<label>Event description:</label><br>
 	<textarea name="input-2" id="input-2" rows=3 size=50> </textarea><br>
     <label>Select Image File:</label><br>
     <input type="file" name="image"><br><br>
-    <input type="submit" name="submit" value="Upload">
+    <input type="submit" name="submit" value="Upload"> -->
 </form>
+<div class="form-group">
+<label>Event name: </label> 
+<input class="form-control" type="textbox" name="input-1"  id="input-1" size="30" required="true"  >  
+</div>
+     
+<div class="form-group">
+<label>Event description </label> 
+<textarea class="form-control" name="input-2" rows="auto" size=50></textarea>  
+</div>
+
+<div class="form-group">
+<label>Select Image File:</label><br>
+<input class="form-control" type="file" name="image"><br><br>
+</div>
+<!-- <div class="form-group">
+<input type="submit" name="submit" value="Upload">
+</div> -->
+ 
+<div class="form-group">
+
+<button  class="btn btn-success btn-block" type="submit" name="submit"  class="button btn-lg btn-block"style="font-weight:600;font-size:100%;">Publish Event &nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span>
+    </button>
+  </div>
+</div>
+
 
 </section>
 <footer><center><img src="hel.png"></center> </footer>
