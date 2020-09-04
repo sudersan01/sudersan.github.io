@@ -1,11 +1,8 @@
+<!-- Surya started here-->
 <?php
 ob_start();
 session_start();
-if($_SESSION["user"] != "tcealumni1957@gmail.com")
-{
-	header('Location: signin.php');
-}
-$sql=new PDO('mysql:host=localhost;dbname=alumni','root','mysql');
+$sql=new PDO('mysql:host=localhost;dbname=alumni','root','');
 $stm=$sql->prepare("select * from db1 where db1.email='".$_SESSION['user']."'");
             $stm->execute();
             $result1=$stm->fetchAll();
@@ -13,8 +10,18 @@ $stm=$sql->prepare("select * from db1 where db1.email='".$_SESSION['user']."'");
                   ?>
                   <?php foreach($result1 as $row)
                   { ?>
+				<?php } ?>
+<?php
+$st=$sql->prepare("select * from verification where verification.email='".$_SESSION['user']."'");
+            $st->execute();
+            $result=$st->fetchAll();
+
+                  ?>
+                  <?php foreach($result as $rows)
+                  { ?>
 
                   <?php } ?>
+
                   <!DOCTYPE HTML>
 <!-- surya ended here-->
 <HEAD>
@@ -272,7 +279,7 @@ span.req {
     <a class="nav-link "  href="signin.php"><span> Login</span></a>    
  </li>
  <li class="nav-item"> 
-    <a class="nav-link "  href="visit.php"><span>Visit the instituition</span></a>         </li>   
+    <a class="nav-link "  href="register1.html"><span>Visit the instituition</span></a>         </li>   
 <li class="nav-item">  
    <a class="nav-link "   href="signin.php"><span> Search</span></a>       </li>  
 <li class="nav-item"> <button type="button" class="btn" style="color: #830000; Font :Helvetica;font-size:16.8px; font-weight:700;  font-style: normal;
@@ -322,14 +329,23 @@ span.req {
         <div class="col-md-6 ">
 
 <!-- Surya edited here-->
-<form method="POST">
+<form method="POST" name="update">
 <!-- Surya ended here-->
 <div class="form-group">
+
+		<label>PASSWORD  <span class="req">* </span> </label> 
+			<input class="form-control"  type="text" name="password" value="<?php echo $rows['PASSWORD']; ?>" id="password" placeholder ="password"></input>
+					<span id="cnfrm" class="cnfrm"></span></div>
+		<!--</div>-->
+		 
+		<div class="form-group">
+
 <label for="">BRANCH <span class="req">* </span>  </label> <!--
 <input class="form-control" type = "text" name="batch" placeholder = "Year of joining" value=""/>   
 <span id="confirmMsg2" class="confirmMsg2"></span>-->
+
 <select name="branch" class="form-control" >
-		<option value=""><?php echo $row['BRANCH']; ?></option>
+		<option value="<?php echo $row['BRANCH']; ?>"><?php echo $row['BRANCH']; ?></option>
 		<option value="Civil">Civil Engineering</option>
 		<option value="CSE">Computer Science and Engineering</option>
 		<option value="Electronics">Electronics and Communication Engineering</option>
@@ -350,41 +366,9 @@ span.req {
 			<input type="checkbox" name="degree" value="PG" id="PG" onclick="fun5()">Post Graduate</input>
     </div>
 
-    <div class="form-group">
-		<div id="pg"><br>
-		<label for="">SPECIALIZATION <span class="req">* </span>  </label>
-				</b><input class="form-control" type = "text" name="specialization"  value = "" placeholder="Enter specialization for PG" ></input>
-        </div></div>
-        
-        <div class="form-group">
-		
-		<label for="">HIGHER EDUCATION : </label>
-	<select class="form-control" name="hiedu" id="hiedu" onchange="sel1()">
-			<option value="none"  >---None---</option>
-			<option value="Masters" id="Masters" onclick="fun11()" >Masters</option>
-			<option value="Doctoral" id="Doctoral" onclick="fun11()">Doctoral</option>
-			<option value="Others" id="other2" onclick="fun10()">Others</option>
-    </select>
-</div>
+ 
+       
 
-<div class="form-group">
-
-		<div id="hieduspec">
-		 
-		<label for="">SPECIALIZATION <span class="req">* </span> </label>
-		
-			</b><input class="form-control" type = "text" name="spec"  value = "" placeholder="Enter specialization"></input>
-		</div></div>
-		
-		<div class="form-group">
-
-				<div id="instituition">
-		
-		<label for="">INSTITUITION <span class="req">* </span> </label>
-		
-			<input class="form-control" type = "text" name="instituition"  value = "" placeholder="Enter the instituition name" ></input>
-
-        </div></div>
         
         <div class="form-group">
 
@@ -393,21 +377,16 @@ span.req {
 					<span id="cnfrm" class="cnfrm"></span></div>
 		<!--</div>-->
 		 
-				<div class="form-group">
-
-		<label>EMAIL ID <span class="req">* </span> </label>
-			<input class="form-control" type="email" name="email" value="<?php echo $row['EMAIL']; ?>" placeholder ="Email id"></input>
-		</div>
         
         <h2 style="color:blue;font-weight:800;">Career Information</h2>
 		 <br>
 				<div class="form-group">
 
-	 <label>WORK INFORMATION <span class="req">* </span></label>
+	 <label>WORK INFORMATION <span>* </span></label>
 
 
-		<select class="form-control" name="workinfo" id="workinfo" onchange="sel2()" >
-		<option value="">---Select your option---</option>
+		<select class="form-control" name="work">
+		<option value="<?php echo $row['WORK_INFO']; ?>"><?php echo $row['WORK_INFO']; ?></option>
 		<option value="Corporate">Corporate</option>
 		<option value="Government">Government</option>
 		<option value="Entrepreneur">Entrepreneur</option>
@@ -415,51 +394,41 @@ span.req {
 		<option value="Others">Others</option>
 		</select>
 </div>
-				<div class="form-group">
-
-		<div id="other">
-		 
-		   <label>OTHER <span class="req">* </span></label> 
-		   <input class="form-control" width="100%" type = "text" name="other" placeholder = "Specify your work information" value="" />
-		</div></div>
-		
+				<div class="form-group">		
 		 
 				<div class="form-group">
 
-		 <label>DOMAIN <span class="req">* </span></label> 
-
-
-
-		<select class="form-control" name="domain" id="domain" onchange="sel3()">
-		<option value="">---Select your option---</option>
+		 <label>DOMAIN <span>* </span></label> 
+		<select class="form-control" name="domain">
+		<option value="<?php echo $row['DOMAIN']; ?>"><?php echo $row['DOMAIN']; ?></option>
 		<option value="Hardware">Hardware</option>
 		<option value="Software">Software</option>
 		<option value="Management">Management</option>
-		<option value="Research and Development">Research and Development</option>
+		<option value="Research and development">Research and Development</option>
 		<option value="Teaching">Teaching</option>
-		<option value="Others">Others</option>
 		</select>
 </div>
 
+<div class="form-group">
 
+		<div id="hieduspec">
 		 
-				<div class="form-group">
+		<label for="">SPECIALIZATION <span class="req">* </span> </label>
+		
+			</b><input class="form-control" type = "text" name="spec"  value = "<?php echo $row['SPECZ']; ?>" placeholder="<?php echo $row['SPECZ']; ?>"></input>
+		</div></div>
 
-		<div id="otherdom">
-		 <label>OTHER <span class="req">* </span></label> 
-			<input class="form-control" type = "text" name="other1" placeholder = "Specify your work domain" value="" width="100%" />
-		    		
-			</div>
-		</div>
+
+		
 		<div class="form-group">
 
 		 <label>EMPLOYER / SECTOR <span class="req">* </span></label> 
-		<input class="form-control" type = "text" name="emp" placeholder = "Owned company name (for Entrepreneurs) / Employed company " value=""/>
+		<input class="form-control" type = "text" name="emp" placeholder = "Employer/Sector" value="<?php echo $row['EMPLOYER']; ?>"/>
 		
 		</div>
 		 	<div class="form-group">
 		 <label>DESIGNATION <span class="req">* </span></label> 
-		<input class="form-control"type = "text" name="designation" placeholder = "Designation" value=""  />		 	
+		<input class="form-control"type ="text" name="designation"  placeholder = "Designation" value="<?php echo $row['DESIGNATION']; ?>"  />		 	
 </div>
 		<div class="form-group">
 
@@ -467,32 +436,23 @@ span.req {
 
 
 
-		<select class="form-control" name="willingness" id="willingness" onchange="sel4()">
-		<option value="Not interested">Not interested</option>
+		<select class="form-control" name="willing" id="willing" onchange="sel4()">
+		<option value="<?php echo $row['WILLINGNESS']; ?>"><?php echo $row['WILLINGNESS']; ?> </option>
 		<option value="To take seminars">To take seminars</option>
 		<option value="To conduct workshops">To conduct workshops</option>
 		<option value="To recruit">To recruit</option>
 		<option value="To give placement training">To give placement training</option>
 		<option value="To offer internships">To offer internships</option>
 		<option value="To support as mentors/guides">To support as mentors/guides</option>
-		<option value="Others">Others</option>
 		</select>
 
 
 </div>
 		 
-				<div class="form-group">
-
-		<div id="otherwill">
-		 <label>OTHER <span class="req">* </span></label></b> 
-			<input class="form-control"type = "text" name="other11" placeholder = "Specify your willingness" value="" width="100%"  />
-		     
-		</div>
-</div>
-
+				
 <input class="form-control" style="background:blue;color:white;font-weight:800;font-size:150%;" type="submit" name="update" value="UPDATE"></input>
 		</fieldset>
-    </form></div></div></div></div>
+    </div></div></div></div>
 </form>
 
 <footer class="blog-footer">
@@ -516,20 +476,34 @@ span.req {
 	$db = mysqli_connect('localhost', 'root', '', 'alumni');
 
 	// initialize variables
-	$email = "";
+	$degree = "";
     $mobile = "";
-    $branch = "";
+	$branch = "";
+	$designation ="";
+	$emp="";
+	$work="";
+	$domain="";
+	$password="";
+	$willing="";
     $update = false;
    
     if (isset($_POST['update'])) {
-        $email = $_POST['email'];
+        $degree = $_POST['degree'];
         $mobile = $_POST['mobile'];
 		$branch = $_POST['branch'];
-		$designation = $POST['designation'];
-		$emp         = $POST['emp'];
-    
-        mysqli_query($db, "UPDATE db1 SET email='$email', mobile='$mobile', branch='$branch' WHERE db1.email='".$_SESSION['user']."'");
-        header('location: home2.php');
+		$designation = $_POST['designation'];
+		$emp         = $_POST['emp'];
+		$specz       =$_POST['spec'];
+		$work        =$_POST['work'];
+		$domain      =$_POST['domain'];
+		$password    =$_POST['password'];
+		$willing     =$_POST['willing'];
+	
+        mysqli_query($db, "UPDATE db1 SET degree='$degree', mobile='$mobile', branch='$branch', designation='$designation', employer='$emp', 
+		specz='$specz', domain='$domain', WORK_INFO='$work',WILLINGNESS='$willing' WHERE db1.email='".$_SESSION['user']."'");
+		mysqli_query($db,"UPDATE verification SET verification.password='$password' WHERE verification.email='".$_SESSION['user']."'");
+		header('location: home2.php');
+
     }
     ob_end_flush();
 ?>
