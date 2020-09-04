@@ -34,7 +34,7 @@ if(isset($_POST["submit"])){
             // Insert image content into database 
             $ab="SELECT COUNT(*) FROM events;";
             $ct=mysqli_query($con,$ab);
-            $ct=$ct+0;
+            $ct=$ct+1;
             $name=$_POST['input-1'];
             $desc=$_POST['input-2'];
             $query="INSERT INTO events (id,image,uploaded,name,description) VALUES ('".$ct."','".$imgContent."',NOW(),'".$name."','".$desc."');";

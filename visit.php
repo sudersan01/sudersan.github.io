@@ -121,7 +121,7 @@ span.req {
 	UserManual</button> </li> 
  <!--<a class="nav-link "   href="User Manual-Alumni.pdf" style="text-decoration:none" target="_top">UserManual</a> --> 
 
-
+ <!-- Trigger the modal with a button -->
        </ul> 
 </div></nav>
 	   
