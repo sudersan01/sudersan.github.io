@@ -182,7 +182,7 @@ if($_SESSION["user"] != "tcealumni1957@gmail.com")
  
 <div class="form-group">
 
-<button  class="btn btn-success btn-block" type="submit" name="submit"  class="button btn-lg btn-block" onclick="location.href='upload.php'" style="font-weight:600;font-size:100%";>Publish Event &nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span>
+<button  class="btn btn-info btn-block" type="submit" name="submit"  class="button btn-lg btn-block" onclick="location.href='upload.php'" style="font-weight:600;font-size:100%";>Publish Event &nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span>
     </button>
   </div>
 </div>
