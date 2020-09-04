@@ -1,6 +1,11 @@
 <?php
 session_start();
+if(isset($_SESSION['user']) ){
 
+// destroy the session
+session_destroy(); 
+
+}
 ?>
 <html><head>
 
@@ -14,7 +19,8 @@ session_start();
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-   
+
+<link rel="stylesheet" href="sty_gallery.css">   
 <link rel="stylesheet" type="text/css" href="css/styleindex.css">
 <link rel="stylesheet" href="w3.css">
  <link rel="stylesheet" href="css/blog.css">
@@ -182,7 +188,7 @@ $(function(){
  
   
   
-  <div class="container"
+  <div class="container">
  <div id="demo" class="carousel slide" data-ride="carousel">
   <ul class="carousel-indicators">
     <li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -214,100 +220,62 @@ $(function(){
   </a>
 </div>
   </div>
-  <div class="container">
   
-    <br>
+
+ <nav class="navbar navbar-expand-lg sticky-top ">  
+ <a class="navbar-brand nav-link"  href="index.php">Gallery</a>
+
+</nav>
+
+<div class="gallery-image">
   
-<div class="card-columns">
-  <div class="card">
-    <img src="thiagarajar-college-of-engineering-tce-madurai.jpg" class="card-img-top" alt="image not available!!!">
-    <div class="card-body">
-      <h5 class="card-title">Alumni chapters</h5>
-      <p class="card-text">TCE Alumni Association is functioning at the institute and through its chapters spread across the country and abroad.</p>
+    <div class="img-box">
+	
+      <img src="thiagarajar-college-of-engineering-tce-madurai.jpg" alt="" />
+      <div class="transparent-box">
+        <div class="caption">
+          <p>TCE Alumni Association is functioning at the institute and through its chapters spread across the country and abroad.</p>
+          <p class="opacity-low"></p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Recent happenings....</h5>
-      <p class="card-text">lorem ipsum.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <div class="img-box">
+      <img src="SCHOLARSHIPS.jpg" alt="" />
+      <div class="transparent-box">
+        <div class="caption">
+          <p>Provide scholarships to students at your alma mater.</p>
+          <p class="opacity-low"></p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="card">
-    <img src="SCHOLARSHIPS.jpg" class="card-img-top" alt="image not available!!!">
-    <div class="card-body">
-      <h5 class="card-title">Alumni scholarships</h5>
-      <p class="card-text">Provide scholarships to students at your alma mater.</p>
+    <div class="img-box">
+      <img src="tcealumnus.png" alt="" />
+      <div class="transparent-box">
+        <div class="caption">
+          <p>Organize reunions, Personality development camps and mentorship programs.</p>
+          <p class="opacity-low"></p>
+        </div>
+      </div>
     </div>
-  </div>
-  
-  <div class="card text-center">
-    <div class="card-body">
-      <h5 class="card-title">Recent happenings.....</h5>
-      <p class="card-text">lorem ipsum.</p>
-      <p class="card-text"><small class="text-muted">Last updated 15 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src="tcealumnus.png" class="card-img-top" alt="image not available">
-    <h5 class="card-title">Alumni programs</h5>
-      <p class="card-text">Organize reunions, Personality development camps and mentorship programs.</p>
-  </div>
-  
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Recent happenings</h5>
-      <p class="card-text">lorem ipsum.</p>
-      <p class="card-text"><small class="text-muted">Last updated 31 mins ago</small></p>
-    </div>
-  </div>
+
 </div>
+
 
  <nav class="navbar navbar-expand-lg sticky-top ">  
  <a class="navbar-brand nav-link"  href="index.php">Events</a>
 
 </nav>
 <br>
-<?php
-$dbHost     = "localhost";  
-$dbUsername = "root";  
-$dbPassword = "mysql";  
-$dbName     = "alumni";  
-  
-// Create database connection  
-$db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);  
-  
-// Check connection  
-if ($db->connect_error) {  
-    die("Connection failed: " . $db->connect_error);  
-}
-$result = $db->query("SELECT image FROM events WHERE Id=1");
-$name= $db->query("SELECT name FROM events WHERE Id=1");
-$desc=$db->query("SELECT description FROM events WHERE Id=1");
-$time=$db->query("SELECT uploaded FROM events WHERE Id=1");
-?>
-
-
-
 <div class="card-deck">
   <div class="card">
-    <?php while($row = $result->fetch_assoc()){ ?> 
-       
-    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" class="card-img-top" alt="image not available !!!">
-     <?php } ?>
+    <img src="alumni-meet.png" class="card-img-top" alt="image not available !!!">
     <div class="card-body">
-      <?php while($row = $name->fetch_assoc()){ ?> 
-      <h5 class="card-title"><?php echo($row['name']); ?></h5>
-      <?php } ?>
-        <?php while($row = $desc->fetch_assoc()){ ?> 
-      <p class="card-text"><?php echo($row['description']); ?></p>
-         <?php } ?>
+      <h5 class="card-title">Silver jubilee alumni meet</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
     </div>
     <div class="card-footer">
         <a href="#" class="btn btn-primary">View</a><br><br>
-        <?php while($row = $time->fetch_assoc()){ ?> 
-      <small class="text-muted">Last updated <?php echo($row['uploaded']); ?></small>
-       <?php } ?>
+      <small class="text-muted">Last updated  0 mins ago</small>
     </div>
   </div>
   <div class="card">
