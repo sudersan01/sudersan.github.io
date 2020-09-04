@@ -219,7 +219,7 @@ body
 </div>
 <br /><br />
 <div class="form-group">
-  <button  class="btn btn-success btn-block" type="submit" value="Reset Password" class="button btn-lg btn-block"style="font-weight:600;font-size:100%;">Reset Password &nbsp;&nbsp;<span class="glyphicon glyphicon-refresh"></span></span>
+  <button  class="btn btn-danger btn-block" type="submit" value="Reset Password" class="button btn-lg btn-block"style="font-weight:600;font-size:100%;">Reset Password &nbsp;&nbsp;<span class="glyphicon glyphicon-refresh"></span></span>
     </button>
 <!-- <input type="submit" value="Reset Password"/> -->
 </div>
