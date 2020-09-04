@@ -7,6 +7,17 @@ session_destroy();
 
 }
 ?>
+<?php
+try{
+	$con=new PDO("mysql:host=localhost;dbname=alumni","root","");
+}catch(PDOExection $e){
+	echo $e->getMessage();
+}
+$sql="SELECT Location,count(SNO) from db1 group by Location";
+$stmt=$con->prepare($sql);
+$stmt->execute();
+$arr=$stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <html><head>
 
 <meta charset="utf-8">
@@ -116,6 +127,30 @@ $(function(){
     });    
 })
 </script>
+   
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {
+        'packages':['geochart'],
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+      
+		function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'No. of Alumnis'],
+		  <?php foreach($arr as $key=>$val){
+		  ?>
+          ['<?php echo $val['Location']?>', <?php echo $val['count(SNO)']?>],
+		  <?php } ?>
+        ]);
+		
+        var options = {};
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        chart.draw(data, options);
+      }
+    </script>
+   
    
   </head>
   <body>
@@ -301,12 +336,15 @@ $(function(){
     </div>
   </div>
 </div>
-</div>
+<!--location-begins-->
 
-
-
- 
-
+<nav class="navbar navbar-expand-lg sticky-top "> 
+<h2 class="navbar-brand nav-link">Our Alumnis Worldwide</h2>
+</nav>
+<center>
+<div id="regions_div" style="width: 1200px; height: 400px;"></div>
+ </center>
+<!--location-ends-->
  
  
 <footer class="blog-footer">
