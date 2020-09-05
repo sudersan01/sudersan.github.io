@@ -5,7 +5,7 @@ if($_SESSION["user"] != "tcealumni1957@gmail.com")
 	header('Location: signin.php');
 }
 ?>
-<! DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -103,6 +103,17 @@ if($_SESSION["user"] != "tcealumni1957@gmail.com")
 .side li
 {text-decoration:none;}
 
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  right: 0;
+  left: 100%;
+  margin-bottom: -1px;
+}
+
+
 </style>
 <script type="text/javascript">
 	function f1()
@@ -113,6 +124,14 @@ if($_SESSION["user"] != "tcealumni1957@gmail.com")
 	{
 		document.getElementById('alu').style.display="none";
 	}
+	
+	$(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
 
 </script>
 </head>
@@ -123,29 +142,31 @@ if($_SESSION["user"] != "tcealumni1957@gmail.com")
 	<h1>ALUMNI DATABASE<h1> 
 </div>
 <br>
-<div style="margin: 0 0 0 1000px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="tce.png" width="50px" height="50px" style="border-radius: 25px;vertical-align: middle;" onclick="fl()"><br><br>
-  <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><?php echo $_SESSION["user"] ?>
+<div style="margin: 0 0 0 1000px">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<img src="tce.png" width="50px" height="50px" style="border-radius: 25px;vertical-align: middle;"><br><br>
+
+   <div class="dropdown">
+       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><?php echo $_SESSION["user"] ?>
+
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
-      <li><a href="insertpage.php">Insert</a></li>
-      <li><a href="updatepage.php">Update</a></li>
-      <li><a href="database1.php">Search</a></li>
-      <li><a href="verify.php">Verify</a></li>
-      <li><a href="events.php">Events</a></li>
-      <li><a href="index.php">Logout</a></li>
-    </ul>
+      <li class="dropdown-submenu" style="left:0;">
+        <a class="test" tabindex="-1" href="#">Insert <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a tabindex="-1" href="importexcel.php">Import from Excel</a></li>
+          <li><a tabindex="-1" href="insertpage.php">Form</a></li>
+        </ul>
+      </li>     
+	 <li><a tabindex="-1" href="updatepage.php">Update</a></li>
+      <li><a tabindex="-1" href="database1.php">Search</a></li>
+      <li><a tabindex="-1" href="verify.php">Verify</a></li>
+      <li><a tabindex="-1" href="events.php">Events</a></li>
+      <li><a tabindex="-1" href="view_table.php">View Data</a></li>
+      <li><a tabindex="-1" href="index.php">Logout</a></li>	  
+	</ul>
   </div>
 </div><span style="vertical-align: middle;font-weight: bold;text-overflow: ellipsis;">
 	</div>
-	<br>
-
-
-	
-
-
-
-	
+	<br>	
 
 
 
@@ -199,16 +220,7 @@ if($_SESSION["user"] != "tcealumni1957@gmail.com")
     </font>
     </div>
 
-   <!--  <div class="side" style="">
-	<ul type="none">
-	<li><button class="btn btn-primary"><a href="register1.html" style="color: white;"> Visit the instituition</a></li><br>
-	<li><button class="btn btn-primary"><a href="database1.php" style="color:white;"> Search</a></button></li><br>
-	<li><button class="btn btn-primary"><a href="insertpage.php" style="color:white;"> Insert</a></button></li><br>
-	<li><button class="btn btn-primary"><a href="updatepage.php" style="color:white;"> Update</a></button></li><br>
-	<li><button class="btn btn-primary"><a href="verify.php" style="color:white;">Verify Registration</a></button></li><br>
-</ul>
-	
-    </div> -->
+  
 
 </section>
 <footer><center><img src="hel.png"></center> </footer>

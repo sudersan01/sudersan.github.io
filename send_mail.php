@@ -49,7 +49,7 @@ $output.='<p>Please click on the following link to reset your password.</p>';
 $output.='<p>-------------------------------------------------------------</p>';
 $output.='<p><a href="http://localhost/Alumni%20Website_modification/reset_password.php?
 key='.$key.'&email='.$email.'&action=reset" target="_blank">
-http://localhost/Alumni%20Website_modification/reset-password.php
+http://localhost/Alumni%20Website_modification/reset_password.php
 ?key='.$key.'&email='.$email.'&action=reset</a></p>'; 
 $output.='<p>-------------------------------------------------------------</p>';
 $output.='<p>Please be sure to copy the entire link into your browser.
@@ -219,7 +219,7 @@ body
 </div>
 <br /><br />
 <div class="form-group">
-  <button  class="btn btn-success btn-block" type="submit" value="Reset Password" class="button btn-lg btn-block"style="font-weight:600;font-size:100%;">Reset Password &nbsp;&nbsp;<span class="glyphicon glyphicon-refresh"></span></span>
+  <button  class="btn btn-danger btn-block" type="submit" value="Reset Password" class="button btn-lg btn-block"style="font-weight:600;font-size:100%;">Reset Password &nbsp;&nbsp;<span class="glyphicon glyphicon-refresh"></span></span>
     </button>
 <!-- <input type="submit" value="Reset Password"/> -->
 </div>
