@@ -1,6 +1,22 @@
 <?php
 session_start();
+if(isset($_SESSION['user']) ){
 
+// destroy the session
+session_destroy(); 
+
+}
+?>
+<?php
+try{
+	$con=new PDO("mysql:host=localhost;dbname=alumni","root","");
+}catch(PDOExection $e){
+	echo $e->getMessage();
+}
+$sql="SELECT Location,count(SNO) from db1 group by Location";
+$stmt=$con->prepare($sql);
+$stmt->execute();
+$arr=$stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <html><head>
 
@@ -14,7 +30,8 @@ session_start();
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-   
+
+<link rel="stylesheet" href="sty_gallery.css">   
 <link rel="stylesheet" type="text/css" href="css/styleindex.css">
 <link rel="stylesheet" href="w3.css">
  <link rel="stylesheet" href="css/blog.css">
@@ -28,6 +45,7 @@ session_start();
   <script src="js1/bootstrap.bundle.min.js"></script>
   <script src="js1/bootstrap.min.js"></script>
   <script src="js1/popper.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
     </head>
@@ -111,6 +129,30 @@ $(function(){
 })
 </script>
    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {
+        'packages':['geochart'],
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+      
+		function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'No. of Alumnis'],
+		  <?php foreach($arr as $key=>$val){
+		  ?>
+          ['<?php echo $val['Location']?>', <?php echo $val['count(SNO)']?>],
+		  <?php } ?>
+        ]);
+		
+        var options = {};
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        chart.draw(data, options);
+      }
+    </script>
+   
+   
   </head>
   <body>
   <div class="container">
@@ -182,7 +224,7 @@ $(function(){
  
   
   
-  <div class="container"
+  <div class="container">
  <div id="demo" class="carousel slide" data-ride="carousel">
   <ul class="carousel-indicators">
     <li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -214,131 +256,101 @@ $(function(){
   </a>
 </div>
   </div>
-  <div class="container">
   
-    <br>
+
+ <nav class="navbar navbar-expand-lg sticky-top ">  
+ <a class="navbar-brand nav-link"  href="index.php">Gallery</a>
+
+</nav>
+
+<div class="gallery-image">
   
-<div class="card-columns">
-  <div class="card">
-    <img src="thiagarajar-college-of-engineering-tce-madurai.jpg" class="card-img-top" alt="image not available!!!">
-    <div class="card-body">
-      <h5 class="card-title">Alumni chapters</h5>
-      <p class="card-text">TCE Alumni Association is functioning at the institute and through its chapters spread across the country and abroad.</p>
+    <div class="img-box">
+	
+      <img src="thiagarajar-college-of-engineering-tce-madurai.jpg" alt="" />
+      <div class="transparent-box">
+        <div class="caption">
+          <p>TCE Alumni Association is functioning at the institute and through its chapters spread across the country and abroad.</p>
+          <p class="opacity-low"></p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Recent happenings....</h5>
-      <p class="card-text">lorem ipsum.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <div class="img-box">
+      <img src="SCHOLARSHIPS.jpg" alt="" />
+      <div class="transparent-box">
+        <div class="caption">
+          <p>Provide scholarships to students at your alma mater.</p>
+          <p class="opacity-low"></p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="card">
-    <img src="SCHOLARSHIPS.jpg" class="card-img-top" alt="image not available!!!">
-    <div class="card-body">
-      <h5 class="card-title">Alumni scholarships</h5>
-      <p class="card-text">Provide scholarships to students at your alma mater.</p>
+    <div class="img-box">
+      <img src="tcealumnus.png" alt="" />
+      <div class="transparent-box">
+        <div class="caption">
+          <p>Organize reunions, Personality development camps and mentorship programs.</p>
+          <p class="opacity-low"></p>
+        </div>
+      </div>
     </div>
-  </div>
-  
-  <div class="card text-center">
-    <div class="card-body">
-      <h5 class="card-title">Recent happenings.....</h5>
-      <p class="card-text">lorem ipsum.</p>
-      <p class="card-text"><small class="text-muted">Last updated 15 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img src="tcealumnus.png" class="card-img-top" alt="image not available">
-    <h5 class="card-title">Alumni programs</h5>
-      <p class="card-text">Organize reunions, Personality development camps and mentorship programs.</p>
-  </div>
-  
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Recent happenings</h5>
-      <p class="card-text">lorem ipsum.</p>
-      <p class="card-text"><small class="text-muted">Last updated 31 mins ago</small></p>
-    </div>
-  </div>
+
 </div>
+
 
  <nav class="navbar navbar-expand-lg sticky-top ">  
  <a class="navbar-brand nav-link"  href="index.php">Events</a>
 
 </nav>
-<br>
 <?php
-$dbHost     = "localhost";  
-$dbUsername = "root";  
-$dbPassword = "mysql";  
-$dbName     = "alumni";  
-  
-// Create database connection  
-$db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);  
-  
-// Check connection  
-if ($db->connect_error) {  
-    die("Connection failed: " . $db->connect_error);  
-}
-$result = $db->query("SELECT image FROM events WHERE Id=1");
-$name= $db->query("SELECT name FROM events WHERE Id=1");
-$desc=$db->query("SELECT description FROM events WHERE Id=1");
-$time=$db->query("SELECT uploaded FROM events WHERE Id=1");
+     $aVar = mysqli_connect('localhost','root','');
+     mysqli_select_db($aVar,'alumni');
+     $projects = array();
+
+     // fetch data from the database
+     $records = mysqli_query($aVar,'select id, image,uploaded,name,description from events');
 ?>
 
 
 
-<div class="card-deck">
-  <div class="card">
-    <?php while($row = $result->fetch_assoc()){ ?> 
-       
-    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" class="card-img-top" alt="image not available !!!">
-     <?php } ?>
-    <div class="card-body">
-      <?php while($row = $name->fetch_assoc()){ ?> 
-      <h5 class="card-title"><?php echo($row['name']); ?></h5>
-      <?php } ?>
-        <?php while($row = $desc->fetch_assoc()){ ?> 
-      <p class="card-text"><?php echo($row['description']); ?></p>
-         <?php } ?>
-    </div>
-    <div class="card-footer">
-        <a href="#" class="btn btn-primary">View</a><br><br>
-        <?php while($row = $time->fetch_assoc()){ ?> 
-      <small class="text-muted">Last updated <?php echo($row['uploaded']); ?></small>
-       <?php } ?>
-    </div>
-  </div>
-  <div class="card">
-    <img src="alumni-meet.png" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-    </div>
-    <div class="card-footer">
-        <a href="#" class="btn btn-primary">View</a><br><br>
-      <small class="text-muted">Last updated 3 mins ago</small>
-    </div>
-  </div>
-  <div class="card">
-    <img src="alumni-meet.png" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-    </div>
-    <div class="card-footer">
-       <a href="#" class="btn btn-primary">View</a><br><br>
-      <small class="text-muted">Last updated 15 mins ago</small>
-    </div>
-  </div>
+<div class="row text-center" style="display:flex flex-wrap: wrap">
+<?php 
+    $projects = array();
+    while ($project =  mysqli_fetch_assoc($records))
+    {
+        $projects[] = $project;
+    }
+    foreach ($projects as $project)
+    {
+?>
+	<div class="col-md-3 col-sm-6">
+		<div class="thumbnail">
+    <?php
+    echo '<img src="data:image/jpeg;base64,'.base64_encode( $project['image'] ).'"/>';
+  ?>
+	<div class "caption">
+		<h3>
+    <?php echo $project['name']; ?>
+    </h3>
+    <h5>Created:<?php echo $project['uploaded']; ?></h5>
+    <p><?php echo $project['description']; ?></p>
+        <p><a href="#" class="btn btn-primary" role="button">View</a> <a href="#" class="btn btn-danger" role="button">Delete</a></p>
+	</div>
+</div>
+	</div>
+  <?php
+    }
+?>
 </div>
 </div>
+<!--location-begins-->
 
-
-
- 
-
+<nav class="navbar navbar-expand-lg sticky-top "> 
+<h2 class="navbar-brand nav-link">Our Alumnis Worldwide</h2>
+</nav>
+<center>
+<div id="regions_div" style="width: 1200px; height: 400px;"></div>
+ </center>
+<!--location-ends-->
  
  
 <footer class="blog-footer">
